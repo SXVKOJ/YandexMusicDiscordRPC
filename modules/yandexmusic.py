@@ -34,40 +34,48 @@ class MYAPI:
 
     @staticmethod
     def get_current_track():
+        window_title = get_window_title("Yandex.Music")
+
+        if not window_title or window_title == "Yandex.Music":
+            # не вижу смысла перекрывать другие активности 
+            return None
+
         queue = client.queues_list()
 
         if not len(queue):
             raise 'not playing now'
-
+        
+        if not queue:
+            return None
+        
         queue = client.queue(queue[0].id)
-        if queue.context.id == 'user:onyourwave':
-            window_title = get_window_title("Yandex.Music")
 
-            if not window_title:
-                # не вижу смысла перекрывать другие активности 
-                return None
-            
-            window_title = window_title.split('-')[0].strip()
-
-            response = JSONAPI.search_song(window_title)
+        if not queue:
+            return
+        
+        try:
+            track = queue.get_current_track().fetch_track()
 
             return {
-                "title": window_title,
-                "link": JSONAPI.get_song_link(response),
-                "image": JSONAPI.get_song_img(response),
-                "id": JSONAPI.get_song_id(response),
-                "artist": JSONAPI.get_song_artist(response)
+                "title" : track.title,
+                "link" : f"https://music.yandex.ru/album/{track['albums'][0]['id']}/track/{track['id']}/",
+                "image" : f"https://{track.cover_uri.replace('%%', '1000x1000')}",
+                "id" : track.id,
+                "artist" : ", ".join(track.artists_name())
             }
-            
-        track = queue.get_current_track().fetch_track()
+        except Exception as _:
+            if queue.context.id == 'user:onyourwave':
+                window_title = window_title.split('-')[0].strip()
 
-        return {
-            "title" : track.title,
-            "link" : f"https://music.yandex.ru/album/{track['albums'][0]['id']}/track/{track['id']}/",
-            "image" : f"https://{track.cover_uri.replace('%%', '1000x1000')}",
-            "id" : track.id,
-            "artist" : ", ".join(track.artists_name())
-        }
+                response = JSONAPI.search_song(window_title)
+
+                return {
+                    "title": window_title,
+                    "link": JSONAPI.get_song_link(response),
+                    "image": JSONAPI.get_song_img(response),
+                    "id": JSONAPI.get_song_id(response),
+                    "artist": JSONAPI.get_song_artist(response)
+                }
 
 
 class JSONAPI:

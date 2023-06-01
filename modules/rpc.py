@@ -78,6 +78,8 @@ class MRPC:
         except Exception:
             traceback.print_exc()
 
+            time.sleep(1)
+
     @staticmethod
     def call_presence():
         global switch
@@ -88,8 +90,10 @@ class MRPC:
                 song = MYAPI.get_current_track()
 
                 if not song:
-                    MRPC.clear()
-                    
+                    dRPC.clear()
+
+                    MRPC.force_update()
+
                     continue
                 
                 if song['id'] != lasttrack:

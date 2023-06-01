@@ -116,14 +116,14 @@ class Ui_MainWindow(QMainWindow):
             thr = Thread(target=MRPC.call_presence)
             thr.start()
         else:
-            thr._delete
-            MRPC.Clear()
+            thr._delete()
+            MRPC.clear()
     
     def force_update(self, s):
         if s == 2:
             MRPC.force_update()
         else:
-            MRPC.Clear()
+            MRPC.clear()
 
     def force_update_token(self, s):
         MYAPI.force_update_token()

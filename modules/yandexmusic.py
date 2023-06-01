@@ -108,6 +108,9 @@ class JSONAPI:
             if type_ in ['track']:
                 return best
             
+        if len(search_result.tracks["results"]) > 1:
+            return search_result.tracks["results"][1]
+            
         return None
 
 

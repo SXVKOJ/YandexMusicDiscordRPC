@@ -1,7 +1,9 @@
+import time
+import traceback
+
 from configparser import ConfigParser
 from pypresence import Presence
 from modules.yandexmusic import MYAPI
-import time
 
 config = ConfigParser()
 
@@ -43,9 +45,9 @@ class MRPC:
         ] if not song_link is None else None
 
         dRPC.update(
-            details=song,
-            state=artist,
-            large_image=image_link,
+            details=str(song),
+            state=str(artist),
+            large_image=str(image_link),
             small_image="https://github.com/maj0roff/YandexMusicDiscordRPC/blob/main/logo.png?raw=true",
             large_text=f"{artist if not artist is None else ''} - {song}",
             buttons=btns
@@ -68,13 +70,13 @@ class MRPC:
                 switch = 0
 
                 MRPC.updatePresence(
-                    str(song['artist']),
-                    str(song['title']),
-                    str(song['image']),
-                    str(song['link'])
+                    song['artist'],
+                    song['title'],
+                    song['image'],
+                    song['link']
                 )
-        except Exception as e:
-            print(e)
+        except Exception:
+            traceback.print_exc()
 
     @staticmethod
     def call_presence():
@@ -86,6 +88,8 @@ class MRPC:
                 song = MYAPI.get_current_track()
 
                 if not song:
+                    MRPC.clear()
+                    
                     continue
                 
                 if song['id'] != lasttrack:
@@ -95,13 +99,13 @@ class MRPC:
                     switch = 0
 
                     MRPC.updatePresence(
-                        str(song['artist']),
-                        str(song['title']),
-                        str(song['image']),
-                        str(song['link'])
+                        song['artist'],
+                        song['title'],
+                        song['image'],
+                        song['link']
                     )
-            except Exception as e:
-                print(e)
+            except Exception:
+                traceback.print_exc()
 
                 MRPC.idling()
 

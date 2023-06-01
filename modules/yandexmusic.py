@@ -37,7 +37,7 @@ class MYAPI:
         queue = client.queues_list()
 
         if not len(queue):
-            return None
+            raise 'not playing now'
 
         queue = client.queue(queue[0].id)
         if queue.context.id == 'user:onyourwave':
@@ -79,6 +79,7 @@ class MYAPI:
 
 
 class JSONAPI:
+
     @staticmethod
     def get_song_title(response):
         return response['title']

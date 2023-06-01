@@ -52,7 +52,8 @@ from PyQt6.QtWidgets import (
 
 class Ui_MainWindow(QMainWindow):
     global ISTOEXITBLYAT
-    ISTOEXITBLYAT = False   
+    ISTOEXITBLYAT = False
+
     def __init__(self):
         super().__init__()
         self.setObjectName("MainWindow")
@@ -87,7 +88,7 @@ class Ui_MainWindow(QMainWindow):
         show_action = QAction("Показать", self)
         quit_action = QAction("Выход", self)
         hide_action = QAction("Севрнуть в трей", self)
-        lable.triggered.connect(lambda: webbrowser.open('https://github.com/maj0roff/YandexMusicDiscordRPC', new=2))
+        lable.triggered.connect(lambda: webbrowser.open('https://github.com/halupasss/YandexMusicDiscordRPC', new=2))
         show_action.triggered.connect(self.show)
         hide_action.triggered.connect(self.hide)   
 
@@ -101,14 +102,15 @@ class Ui_MainWindow(QMainWindow):
         self.tray_icon.show()
         self.tray_icon.activated.connect(self.show)
 
-    def retranslateUi(self, MainWindow):
+    @staticmethod
+    def retranslateUi(self):
         _translate = QCoreApplication.translate
         self.setWindowTitle(_translate("MainWindow", "Яндекс Музыка RPC"))
         self.checkBox.setText(_translate("MainWindow", "Включить DiscordRPC"))
         self.pushButton.setText(_translate("MainWindow", "Обновить RPC"))
         self.pushButton_2.setText(_translate("MainWindow", "Обновить токен Яндекс Музыки"))
 
-    def AppEnabling(self,s):
+    def AppEnabling(self, s):
         if s == 2:
             global thr
             thr = Thread(target=MRPC.call_presence)
@@ -116,17 +118,17 @@ class Ui_MainWindow(QMainWindow):
         else:
             thr._delete
             MRPC.Clear()
-
-    def force_update(self,s):
+    
+    def force_update(self, s):
         if s == 2:
             MRPC.force_update()
         else:
             MRPC.Clear()
 
-    def force_update_token(self,s):
+    def force_update_token(self, s):
         MYAPI.force_update_token()
-
-    def fullexit():
+    
+    def fullexit(self):
         global ISTOEXITBLYAT
         ISTOEXITBLYAT = True
         thr._delete()

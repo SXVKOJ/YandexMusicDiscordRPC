@@ -10,8 +10,12 @@ config.read('info/config.ini')
 dRPC = Presence(client_id=config.get('main', 'ds'))
 dRPC.connect()
 
+switch = 0
+lasttrack = 0
+
 
 class MRPC:
+    
     @staticmethod
     def clear():
         dRPC.clear()
@@ -48,7 +52,7 @@ class MRPC:
 
     @staticmethod
     def force_update():
-        switch = 0
+        global switch
 
         try:
             song = MYAPI.get_current_track()
@@ -73,15 +77,15 @@ class MRPC:
 
     @staticmethod
     def call_presence():
-        while True:
-            switch = 0
-            lasttrack = 0
+        global switch
+        global lasttrack
 
+        while True:
             try:
                 song = MYAPI.get_current_track()
 
                 if not song:
-                    return
+                    continue
                 
                 if song['id'] != lasttrack:
                     lasttrack = song['id']
@@ -97,6 +101,7 @@ class MRPC:
                     )
             except Exception as e:
                 print(e)
+
                 MRPC.idling()
 
             time.sleep(1)

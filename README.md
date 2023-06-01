@@ -36,4 +36,7 @@ Discord RPC для приложения и веб версии Яндекс Му
 Автор данной программы не несёт ответственность за данные выших аккаунтов, он их не получает и никому не передаёт.
 Все что вы делаете, вы делаете на свой страх и риск.
 
-![image](https://user-images.githubusercontent.com/54349566/216373501-df9b5a3a-7670-4cec-95b6-ea25876d310d.png)
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/54349566/216373501-df9b5a3a-7670-4cec-95b6-ea25876d310d.png" alt="From Russia with love"/>
+</p>
+

@@ -18,7 +18,6 @@ if len(config.get("main", "ym")) <= 2:
     os.system('pip install webbrowser')
 
 import sys
-import time
 from modules.rpc import MRPC
 from modules.yandexmusic import MYAPI
 from threading import Thread
@@ -49,13 +48,14 @@ from PyQt6.QtWidgets import (
     QVBoxLayout
 )
 
-
 class Ui_MainWindow(QMainWindow):
     global ISTOEXITBLYAT
     ISTOEXITBLYAT = False
 
     def __init__(self):
         super().__init__()
+        self.current_index = 0
+        
         self.setObjectName("MainWindow")
         self.setFixedSize(300, 158)
         font = QtGui.QFont()

@@ -34,6 +34,7 @@ class MRPC:
                     song = None, 
                     image_link = None,
                     song_link = None):
+
         btns = [
             {
                 "label": "Слушать",
@@ -65,12 +66,12 @@ class MRPC:
                 switch = 1
             if switch:
                 switch = 0
-                #print(f"[Яндекс Музыка] Слушаем {artist} - {song}")
+
                 MRPC.updatePresence(
-                    song['artist'],
-                    song['title'],
-                    song['image'],
-                    song['link']
+                    str(song['artist']),
+                    str(song['title']),
+                    str(song['image']),
+                    str(song['link'])
                 )
         except Exception as e:
             print(e)
@@ -94,10 +95,10 @@ class MRPC:
                     switch = 0
 
                     MRPC.updatePresence(
-                        song['artist'],
-                        song['title'],
-                        song['image'],
-                        song['link']
+                        str(song['artist']),
+                        str(song['title']),
+                        str(song['image']),
+                        str(song['link'])
                     )
             except Exception as e:
                 print(e)

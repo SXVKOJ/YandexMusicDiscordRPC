@@ -58,14 +58,6 @@ class MYAPI:
                 "id": JSONAPI.get_song_id(response),
                 "artist": JSONAPI.get_song_artist(response)
             }
-        
-            """return {
-                "title" : "Моя волна",
-                "link" : None,
-                "image" : "https://github.com/maj0roff/YandexMusicDiscordRPC/raw/main/fallback-black_2.gif",
-                "id" : "wave",
-                "artist" : None
-            }"""
             
         track = queue.get_current_track().fetch_track()
 

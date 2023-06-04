@@ -5,7 +5,7 @@ Discord RPC для приложения и веб версии Яндекс Му
 ![src](https://img.shields.io/badge/source%20code-open-red)
 ![src2](https://img.shields.io/badge/language-python-blue)
 
-Доработка, улучшение кода/функционала : @maj0roff, @halupasss
+Доработка, улучшение кода/функционала : @maj0roff, @SXVKOJ
 
 Добавлено:
 * Отображение mywawe через название окна, и получение остальных данных через API

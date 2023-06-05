@@ -65,7 +65,7 @@ class MYAPI:
             }
         except Exception as _:
             if queue.context.id == 'user:onyourwave':
-                window_title = window_title.split('-')[0].strip()
+                window_title = ' '.join(window_title.split('-')[:-1]).strip()
 
                 response = JSONAPI.search_song(window_title)
 

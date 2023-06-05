@@ -21,6 +21,7 @@ class MRPC:
     @staticmethod
     def clear():
         dRPC.clear()
+        MRPC.force_update()
 
     @staticmethod
     def idling():
@@ -56,6 +57,7 @@ class MRPC:
     @staticmethod
     def force_update():
         global switch
+        global lasttrack
 
         try:
             song = MYAPI.get_current_track()
@@ -95,6 +97,8 @@ class MRPC:
                     MRPC.force_update()
 
                     continue
+
+                print("[Yandex Music]:", song['id'], song['artist'], song['title'])
                 
                 if song['id'] != lasttrack:
                     lasttrack = song['id']

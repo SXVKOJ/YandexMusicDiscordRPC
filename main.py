@@ -116,8 +116,8 @@ class Ui_MainWindow(QMainWindow):
             thr = Thread(target=MRPC.call_presence)
             thr.start()
         else:
-            thr._delete()
             MRPC.clear()
+            thr._delete()         
     
     def force_update(self, s):
         if s == 2:
